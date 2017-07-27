@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="69b87aad09374c76964c7c8d6e37f641" Name="Diagram1">
+        <EntityTypeShape EntityType="AcModel.acapp" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acaxp" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.accon" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acepc" Width="1.5" PointX="3.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.aclgn" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.aclog" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acmod" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acmxe" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acpme" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acprf" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acpxe" Width="1.5" PointX="11.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acser" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acusr" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acuxe" Width="1.5" PointX="6" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.acuxp" Width="1.5" PointX="8.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AcModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="AcModel.fk_acappCmod" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acappTapp" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acaxpcapp" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_aclogCapp" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acaxpcmod" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acaxpCprf" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acepcRubr" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_aclogCevn" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acmxeCepc" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acpxeCepc" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acuxeCepc" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acuxpCepc" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_aclgnCusr" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_aclogClgn" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_aclogcmod" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_aclogcusr" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acmxeCmod" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acpxeCprf" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acuxpCprf" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acuxeCusr" ManuallyRouted="false" />
+        <AssociationConnector Association="AcModel.fk_acuxpCusr" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

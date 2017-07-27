@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AcModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="acapp">
+    <Key>
+      <PropertyRef Name="acappCapp" />
+    </Key>
+    <Property Name="acappCapp" Type="Int32" Nullable="false" />
+    <Property Name="acappDesc" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acappCmod" Type="Int32" Nullable="false" />
+    <Property Name="acappTapp" Type="Int32" Nullable="false" />
+    <Property Name="acappUrlx" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acappCtrl" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acappNord" Type="Int32" Nullable="false" />
+    <Property Name="acappVisi" Type="Int32" Nullable="false" />
+    <Property Name="acappeGra" Type="Int32" Nullable="false" />
+    <Property Name="acappeEli" Type="Int32" Nullable="false" />
+    <Property Name="acappeAct" Type="Int32" Nullable="false" />
+    <Property Name="acappeBus" Type="Int32" Nullable="false" />
+    <Property Name="acappStat" Type="Int32" Nullable="false" />
+    <Property Name="acappRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acmod" Relationship="Self.fk_acappCmod" FromRole="acapp" ToRole="acmod" />
+    <NavigationProperty Name="accon" Relationship="Self.fk_acappTapp" FromRole="acapp" ToRole="accon" />
+    <NavigationProperty Name="acaxp" Relationship="Self.fk_acaxpcapp" FromRole="acapp" ToRole="acaxp" />
+    <NavigationProperty Name="aclog" Relationship="Self.fk_aclogCapp" FromRole="acapp" ToRole="aclog" />
+  </EntityType>
+  <EntityType Name="acaxp">
+    <Key>
+      <PropertyRef Name="acaxpCaxp" />
+    </Key>
+    <Property Name="acaxpCaxp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="acaxpCprf" Type="Int32" Nullable="false" />
+    <Property Name="acaxpCmod" Type="Int32" Nullable="false" />
+    <Property Name="acaxpCapp" Type="Int32" Nullable="false" />
+    <Property Name="acaxpeGra" Type="Int32" Nullable="false" />
+    <Property Name="acaxpeEli" Type="Int32" Nullable="false" />
+    <Property Name="acaxpeAct" Type="Int32" Nullable="false" />
+    <Property Name="acaxpeBus" Type="Int32" Nullable="false" />
+    <Property Name="acaxpStat" Type="Int32" Nullable="false" />
+    <Property Name="acaxpRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acapp" Relationship="Self.fk_acaxpcapp" FromRole="acaxp" ToRole="acapp" />
+    <NavigationProperty Name="acmod" Relationship="Self.fk_acaxpcmod" FromRole="acaxp" ToRole="acmod" />
+    <NavigationProperty Name="acprf" Relationship="Self.fk_acaxpCprf" FromRole="acaxp" ToRole="acprf" />
+  </EntityType>
+  <EntityType Name="accon">
+    <Key>
+      <PropertyRef Name="acconCcon" />
+    </Key>
+    <Property Name="acconCcon" Type="Int32" Nullable="false" />
+    <Property Name="acconPref" Type="Int32" Nullable="false" />
+    <Property Name="acconCorr" Type="Int32" Nullable="false" />
+    <Property Name="acconAbrv" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acconDesc" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acconStaC" Type="Int32" Nullable="false" />
+    <Property Name="acconRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acapp" Relationship="Self.fk_acappTapp" FromRole="accon" ToRole="acapp" />
+    <NavigationProperty Name="acepc" Relationship="Self.fk_acepcRubr" FromRole="accon" ToRole="acepc" />
+    <NavigationProperty Name="aclog" Relationship="Self.fk_aclogCevn" FromRole="accon" ToRole="aclog" />
+  </EntityType>
+  <EntityType Name="acepc">
+    <Key>
+      <PropertyRef Name="acepcCepc" />
+    </Key>
+    <Property Name="acepcCepc" Type="Int32" Nullable="false" />
+    <Property Name="acepcNomb" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acepcSigl" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="acepcNrou" Type="Int32" Nullable="false" />
+    <Property Name="acepcRubr" Type="Int32" Nullable="false" />
+    <Property Name="acepcMisn" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acepcDbnm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acepcScnx" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acepcFreg" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="acepcFvto" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="acepcStat" Type="Int32" Nullable="false" />
+    <Property Name="acepcRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="accon" Relationship="Self.fk_acepcRubr" FromRole="acepc" ToRole="accon" />
+    <NavigationProperty Name="acmxe" Relationship="Self.fk_acmxeCepc" FromRole="acepc" ToRole="acmxe" />
+    <NavigationProperty Name="acpxe" Relationship="Self.fk_acpxeCepc" FromRole="acepc" ToRole="acpxe" />
+    <NavigationProperty Name="acuxe" Relationship="Self.fk_acuxeCepc" FromRole="acepc" ToRole="acuxe" />
+    <NavigationProperty Name="acuxp" Relationship="Self.fk_acuxpCepc" FromRole="acepc" ToRole="acuxp" />
+  </EntityType>
+  <EntityType Name="aclgn">
+    <Key>
+      <PropertyRef Name="aclgnClgn" />
+    </Key>
+    <Property Name="aclgnClgn" Type="Int32" Nullable="false" />
+    <Property Name="aclgnCusr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="aclgnSess" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="aclgnHNam" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="aclgnISrv" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="aclgnFsys" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="acusr" Relationship="Self.fk_aclgnCusr" FromRole="aclgn" ToRole="acusr" />
+    <NavigationProperty Name="aclog" Relationship="Self.fk_aclogClgn" FromRole="aclgn" ToRole="aclog" />
+  </EntityType>
+  <EntityType Name="aclog">
+    <Key>
+      <PropertyRef Name="aclogRide" />
+    </Key>
+    <Property Name="aclogRide" Type="Int32" Nullable="false" />
+    <Property Name="aclogCusr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="aclogClgn" Type="Int32" Nullable="false" />
+    <Property Name="aclogCmod" Type="Int32" Nullable="false" />
+    <Property Name="aclogCapp" Type="Int32" Nullable="false" />
+    <Property Name="aclogCevn" Type="Int32" Nullable="false" />
+    <Property Name="aclogFsys" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="aclogRida" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acapp" Relationship="Self.fk_aclogCapp" FromRole="aclog" ToRole="acapp" />
+    <NavigationProperty Name="accon" Relationship="Self.fk_aclogCevn" FromRole="aclog" ToRole="accon" />
+    <NavigationProperty Name="aclgn" Relationship="Self.fk_aclogClgn" FromRole="aclog" ToRole="aclgn" />
+    <NavigationProperty Name="acmod" Relationship="Self.fk_aclogcmod" FromRole="aclog" ToRole="acmod" />
+    <NavigationProperty Name="acusr" Relationship="Self.fk_aclogcusr" FromRole="aclog" ToRole="acusr" />
+  </EntityType>
+  <EntityType Name="acmod">
+    <Key>
+      <PropertyRef Name="acmodCmod" />
+    </Key>
+    <Property Name="acmodCmod" Type="Int32" Nullable="false" />
+    <Property Name="acmodAbrv" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="acmodDesc" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acmodMisn" Type="String" MaxLength="180" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acmodNord" Type="Int32" Nullable="false" />
+    <Property Name="acmodimag" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="acmodStaM" Type="Int32" Nullable="false" />
+    <Property Name="acmodStat" Type="Int32" Nullable="false" />
+    <Property Name="acmodRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acapp" Relationship="Self.fk_acappCmod" FromRole="acmod" ToRole="acapp" />
+    <NavigationProperty Name="acaxp" Relationship="Self.fk_acaxpcmod" FromRole="acmod" ToRole="acaxp" />
+    <NavigationProperty Name="aclog" Relationship="Self.fk_aclogcmod" FromRole="acmod" ToRole="aclog" />
+    <NavigationProperty Name="acmxe" Relationship="Self.fk_acmxeCmod" FromRole="acmod" ToRole="acmxe" />
+  </EntityType>
+  <EntityType Name="acmxe">
+    <Key>
+      <PropertyRef Name="acmxeCmxe" />
+    </Key>
+    <Property Name="acmxeCmxe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="acmxeCepc" Type="Int32" Nullable="false" />
+    <Property Name="acmxeCmod" Type="Int32" Nullable="false" />
+    <Property Name="acmxeStat" Type="Int32" Nullable="false" />
+    <Property Name="acmxeRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acepc" Relationship="Self.fk_acmxeCepc" FromRole="acmxe" ToRole="acepc" />
+    <NavigationProperty Name="acmod" Relationship="Self.fk_acmxeCmod" FromRole="acmxe" ToRole="acmod" />
+  </EntityType>
+  <EntityType Name="acpme">
+    <Key>
+      <PropertyRef Name="acpmeCpme" />
+    </Key>
+    <Property Name="acpmeCpme" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="acpmeCfll" Type="Int32" Nullable="false" />
+    <Property Name="acpmeCdwr" Type="Int32" Nullable="false" />
+    <Property Name="acpmeCdvi" Type="Int32" Nullable="false" />
+    <Property Name="acpmePass" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acpmeStat" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="acprf">
+    <Key>
+      <PropertyRef Name="acprfCprf" />
+    </Key>
+    <Property Name="acprfCprf" Type="Int32" Nullable="false" />
+    <Property Name="acprfDesc" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acprfMisn" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acprfStaP" Type="Int32" />
+    <Property Name="acprfStat" Type="Int32" Nullable="false" />
+    <Property Name="acprfRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acaxp" Relationship="Self.fk_acaxpCprf" FromRole="acprf" ToRole="acaxp" />
+    <NavigationProperty Name="acpxe" Relationship="Self.fk_acpxeCprf" FromRole="acprf" ToRole="acpxe" />
+    <NavigationProperty Name="acuxp" Relationship="Self.fk_acuxpCprf" FromRole="acprf" ToRole="acuxp" />
+  </EntityType>
+  <EntityType Name="acpxe">
+    <Key>
+      <PropertyRef Name="acpxeCpxe" />
+    </Key>
+    <Property Name="acpxeCpxe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="acpxeCprf" Type="Int32" Nullable="false" />
+    <Property Name="acpxeCepc" Type="Int32" Nullable="false" />
+    <Property Name="acpxeStat" Type="Int32" Nullable="false" />
+    <Property Name="acpxeRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acepc" Relationship="Self.fk_acpxeCepc" FromRole="acpxe" ToRole="acepc" />
+    <NavigationProperty Name="acprf" Relationship="Self.fk_acpxeCprf" FromRole="acpxe" ToRole="acprf" />
+  </EntityType>
+  <EntityType Name="acser">
+    <Key>
+      <PropertyRef Name="acserCser" />
+    </Key>
+    <Property Name="acserCser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="acserTble" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="acserTkey" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="acserNact" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="acusr">
+    <Key>
+      <PropertyRef Name="acusrCusr" />
+    </Key>
+    <Property Name="acusrCusr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acusrPass" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acusrNomb" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acusrFReg" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="acusrFPas" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="acusrStat" Type="Int32" Nullable="false" />
+    <Property Name="acusrRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="aclgn" Relationship="Self.fk_aclgnCusr" FromRole="acusr" ToRole="aclgn" />
+    <NavigationProperty Name="aclog" Relationship="Self.fk_aclogcusr" FromRole="acusr" ToRole="aclog" />
+    <NavigationProperty Name="acuxe" Relationship="Self.fk_acuxeCusr" FromRole="acusr" ToRole="acuxe" />
+    <NavigationProperty Name="acuxp" Relationship="Self.fk_acuxpCusr" FromRole="acusr" ToRole="acuxp" />
+  </EntityType>
+  <EntityType Name="acuxe">
+    <Key>
+      <PropertyRef Name="acuxeCuxe" />
+    </Key>
+    <Property Name="acuxeCuxe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="acuxeCusr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acuxeCepc" Type="Int32" Nullable="false" />
+    <Property Name="acuxeStaU" Type="Int32" Nullable="false" />
+    <Property Name="acuxeFtra" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="acuxeFvto" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="acuxeStat" Type="Int32" Nullable="false" />
+    <Property Name="acuxeRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acepc" Relationship="Self.fk_acuxeCepc" FromRole="acuxe" ToRole="acepc" />
+    <NavigationProperty Name="acusr" Relationship="Self.fk_acuxeCusr" FromRole="acuxe" ToRole="acusr" />
+  </EntityType>
+  <EntityType Name="acuxp">
+    <Key>
+      <PropertyRef Name="acuxpCuxp" />
+    </Key>
+    <Property Name="acuxpCuxp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="acuxpCusr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="acuxpCprf" Type="Int32" Nullable="false" />
+    <Property Name="acuxpCepc" Type="Int32" Nullable="false" />
+    <Property Name="acuxpStat" Type="Int32" Nullable="false" />
+    <Property Name="acuxpRide" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="acepc" Relationship="Self.fk_acuxpCepc" FromRole="acuxp" ToRole="acepc" />
+    <NavigationProperty Name="acprf" Relationship="Self.fk_acuxpCprf" FromRole="acuxp" ToRole="acprf" />
+    <NavigationProperty Name="acusr" Relationship="Self.fk_acuxpCusr" FromRole="acuxp" ToRole="acusr" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="fk_acappCmod">
+    <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
+    <End Role="acapp" Type="Self.acapp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acmod">
+        <PropertyRef Name="acmodCmod" />
+      </Principal>
+      <Dependent Role="acapp">
+        <PropertyRef Name="acappCmod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acappTapp">
+    <End Role="accon" Type="Self.accon" Multiplicity="1" />
+    <End Role="acapp" Type="Self.acapp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accon">
+        <PropertyRef Name="acconCcon" />
+      </Principal>
+      <Dependent Role="acapp">
+        <PropertyRef Name="acappTapp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acaxpcapp">
+    <End Role="acapp" Type="Self.acapp" Multiplicity="1" />
+    <End Role="acaxp" Type="Self.acaxp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acapp">
+        <PropertyRef Name="acappCapp" />
+      </Principal>
+      <Dependent Role="acaxp">
+        <PropertyRef Name="acaxpCapp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aclogCapp">
+    <End Role="acapp" Type="Self.acapp" Multiplicity="1" />
+    <End Role="aclog" Type="Self.aclog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acapp">
+        <PropertyRef Name="acappCapp" />
+      </Principal>
+      <Dependent Role="aclog">
+        <PropertyRef Name="aclogCapp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acaxpcmod">
+    <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
+    <End Role="acaxp" Type="Self.acaxp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acmod">
+        <PropertyRef Name="acmodCmod" />
+      </Principal>
+      <Dependent Role="acaxp">
+        <PropertyRef Name="acaxpCmod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acaxpCprf">
+    <End Role="acprf" Type="Self.acprf" Multiplicity="1" />
+    <End Role="acaxp" Type="Self.acaxp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acprf">
+        <PropertyRef Name="acprfCprf" />
+      </Principal>
+      <Dependent Role="acaxp">
+        <PropertyRef Name="acaxpCprf" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acepcRubr">
+    <End Role="accon" Type="Self.accon" Multiplicity="1" />
+    <End Role="acepc" Type="Self.acepc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accon">
+        <PropertyRef Name="acconCcon" />
+      </Principal>
+      <Dependent Role="acepc">
+        <PropertyRef Name="acepcRubr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aclogCevn">
+    <End Role="accon" Type="Self.accon" Multiplicity="1" />
+    <End Role="aclog" Type="Self.aclog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accon">
+        <PropertyRef Name="acconCcon" />
+      </Principal>
+      <Dependent Role="aclog">
+        <PropertyRef Name="aclogCevn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acmxeCepc">
+    <End Role="acepc" Type="Self.acepc" Multiplicity="1" />
+    <End Role="acmxe" Type="Self.acmxe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acepc">
+        <PropertyRef Name="acepcCepc" />
+      </Principal>
+      <Dependent Role="acmxe">
+        <PropertyRef Name="acmxeCepc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acpxeCepc">
+    <End Role="acepc" Type="Self.acepc" Multiplicity="1" />
+    <End Role="acpxe" Type="Self.acpxe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acepc">
+        <PropertyRef Name="acepcCepc" />
+      </Principal>
+      <Dependent Role="acpxe">
+        <PropertyRef Name="acpxeCepc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acuxeCepc">
+    <End Role="acepc" Type="Self.acepc" Multiplicity="1" />
+    <End Role="acuxe" Type="Self.acuxe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acepc">
+        <PropertyRef Name="acepcCepc" />
+      </Principal>
+      <Dependent Role="acuxe">
+        <PropertyRef Name="acuxeCepc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acuxpCepc">
+    <End Role="acepc" Type="Self.acepc" Multiplicity="1" />
+    <End Role="acuxp" Type="Self.acuxp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acepc">
+        <PropertyRef Name="acepcCepc" />
+      </Principal>
+      <Dependent Role="acuxp">
+        <PropertyRef Name="acuxpCepc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aclgnCusr">
+    <End Role="acusr" Type="Self.acusr" Multiplicity="1" />
+    <End Role="aclgn" Type="Self.aclgn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acusr">
+        <PropertyRef Name="acusrCusr" />
+      </Principal>
+      <Dependent Role="aclgn">
+        <PropertyRef Name="aclgnCusr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aclogClgn">
+    <End Role="aclgn" Type="Self.aclgn" Multiplicity="1" />
+    <End Role="aclog" Type="Self.aclog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aclgn">
+        <PropertyRef Name="aclgnClgn" />
+      </Principal>
+      <Dependent Role="aclog">
+        <PropertyRef Name="aclogClgn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aclogcmod">
+    <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
+    <End Role="aclog" Type="Self.aclog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acmod">
+        <PropertyRef Name="acmodCmod" />
+      </Principal>
+      <Dependent Role="aclog">
+        <PropertyRef Name="aclogCmod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_aclogcusr">
+    <End Role="acusr" Type="Self.acusr" Multiplicity="1" />
+    <End Role="aclog" Type="Self.aclog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acusr">
+        <PropertyRef Name="acusrCusr" />
+      </Principal>
+      <Dependent Role="aclog">
+        <PropertyRef Name="aclogCusr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acmxeCmod">
+    <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
+    <End Role="acmxe" Type="Self.acmxe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acmod">
+        <PropertyRef Name="acmodCmod" />
+      </Principal>
+      <Dependent Role="acmxe">
+        <PropertyRef Name="acmxeCmod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acpxeCprf">
+    <End Role="acprf" Type="Self.acprf" Multiplicity="1" />
+    <End Role="acpxe" Type="Self.acpxe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acprf">
+        <PropertyRef Name="acprfCprf" />
+      </Principal>
+      <Dependent Role="acpxe">
+        <PropertyRef Name="acpxeCprf" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acuxpCprf">
+    <End Role="acprf" Type="Self.acprf" Multiplicity="1" />
+    <End Role="acuxp" Type="Self.acuxp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acprf">
+        <PropertyRef Name="acprfCprf" />
+      </Principal>
+      <Dependent Role="acuxp">
+        <PropertyRef Name="acuxpCprf" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acuxeCusr">
+    <End Role="acusr" Type="Self.acusr" Multiplicity="1" />
+    <End Role="acuxe" Type="Self.acuxe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acusr">
+        <PropertyRef Name="acusrCusr" />
+      </Principal>
+      <Dependent Role="acuxe">
+        <PropertyRef Name="acuxeCusr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_acuxpCusr">
+    <End Role="acusr" Type="Self.acusr" Multiplicity="1" />
+    <End Role="acuxp" Type="Self.acuxp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acusr">
+        <PropertyRef Name="acusrCusr" />
+      </Principal>
+      <Dependent Role="acuxp">
+        <PropertyRef Name="acuxpCusr" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AcEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="acapp" EntityType="Self.acapp" />
+    <EntitySet Name="acaxp" EntityType="Self.acaxp" />
+    <EntitySet Name="accon" EntityType="Self.accon" />
+    <EntitySet Name="acepc" EntityType="Self.acepc" />
+    <EntitySet Name="aclgn" EntityType="Self.aclgn" />
+    <EntitySet Name="aclog" EntityType="Self.aclog" />
+    <EntitySet Name="acmod" EntityType="Self.acmod" />
+    <EntitySet Name="acmxe" EntityType="Self.acmxe" />
+    <EntitySet Name="acpme" EntityType="Self.acpme" />
+    <EntitySet Name="acprf" EntityType="Self.acprf" />
+    <EntitySet Name="acpxe" EntityType="Self.acpxe" />
+    <EntitySet Name="acser" EntityType="Self.acser" />
+    <EntitySet Name="acusr" EntityType="Self.acusr" />
+    <EntitySet Name="acuxe" EntityType="Self.acuxe" />
+    <EntitySet Name="acuxp" EntityType="Self.acuxp" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="fk_acappCmod" Association="Self.fk_acappCmod">
+      <End Role="acmod" EntitySet="acmod" />
+      <End Role="acapp" EntitySet="acapp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acappTapp" Association="Self.fk_acappTapp">
+      <End Role="accon" EntitySet="accon" />
+      <End Role="acapp" EntitySet="acapp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acaxpcapp" Association="Self.fk_acaxpcapp">
+      <End Role="acapp" EntitySet="acapp" />
+      <End Role="acaxp" EntitySet="acaxp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aclogCapp" Association="Self.fk_aclogCapp">
+      <End Role="acapp" EntitySet="acapp" />
+      <End Role="aclog" EntitySet="aclog" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acaxpcmod" Association="Self.fk_acaxpcmod">
+      <End Role="acmod" EntitySet="acmod" />
+      <End Role="acaxp" EntitySet="acaxp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acaxpCprf" Association="Self.fk_acaxpCprf">
+      <End Role="acprf" EntitySet="acprf" />
+      <End Role="acaxp" EntitySet="acaxp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acepcRubr" Association="Self.fk_acepcRubr">
+      <End Role="accon" EntitySet="accon" />
+      <End Role="acepc" EntitySet="acepc" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aclogCevn" Association="Self.fk_aclogCevn">
+      <End Role="accon" EntitySet="accon" />
+      <End Role="aclog" EntitySet="aclog" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acmxeCepc" Association="Self.fk_acmxeCepc">
+      <End Role="acepc" EntitySet="acepc" />
+      <End Role="acmxe" EntitySet="acmxe" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acpxeCepc" Association="Self.fk_acpxeCepc">
+      <End Role="acepc" EntitySet="acepc" />
+      <End Role="acpxe" EntitySet="acpxe" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acuxeCepc" Association="Self.fk_acuxeCepc">
+      <End Role="acepc" EntitySet="acepc" />
+      <End Role="acuxe" EntitySet="acuxe" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acuxpCepc" Association="Self.fk_acuxpCepc">
+      <End Role="acepc" EntitySet="acepc" />
+      <End Role="acuxp" EntitySet="acuxp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aclgnCusr" Association="Self.fk_aclgnCusr">
+      <End Role="acusr" EntitySet="acusr" />
+      <End Role="aclgn" EntitySet="aclgn" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aclogClgn" Association="Self.fk_aclogClgn">
+      <End Role="aclgn" EntitySet="aclgn" />
+      <End Role="aclog" EntitySet="aclog" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aclogcmod" Association="Self.fk_aclogcmod">
+      <End Role="acmod" EntitySet="acmod" />
+      <End Role="aclog" EntitySet="aclog" />
+    </AssociationSet>
+    <AssociationSet Name="fk_aclogcusr" Association="Self.fk_aclogcusr">
+      <End Role="acusr" EntitySet="acusr" />
+      <End Role="aclog" EntitySet="aclog" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acmxeCmod" Association="Self.fk_acmxeCmod">
+      <End Role="acmod" EntitySet="acmod" />
+      <End Role="acmxe" EntitySet="acmxe" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acpxeCprf" Association="Self.fk_acpxeCprf">
+      <End Role="acprf" EntitySet="acprf" />
+      <End Role="acpxe" EntitySet="acpxe" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acuxpCprf" Association="Self.fk_acuxpCprf">
+      <End Role="acprf" EntitySet="acprf" />
+      <End Role="acuxp" EntitySet="acuxp" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acuxeCusr" Association="Self.fk_acuxeCusr">
+      <End Role="acusr" EntitySet="acusr" />
+      <End Role="acuxe" EntitySet="acuxe" />
+    </AssociationSet>
+    <AssociationSet Name="fk_acuxpCusr" Association="Self.fk_acuxpCusr">
+      <End Role="acusr" EntitySet="acusr" />
+      <End Role="acuxp" EntitySet="acuxp" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

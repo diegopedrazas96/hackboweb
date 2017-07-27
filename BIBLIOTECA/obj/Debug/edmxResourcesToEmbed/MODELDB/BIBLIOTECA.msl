@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AcModelStoreContainer" CdmEntityContainer="AcEntities">
+    <EntitySetMapping Name="acapp">
+      <EntityTypeMapping TypeName="AcModel.acapp">
+        <MappingFragment StoreEntitySet="acapp">
+          <ScalarProperty Name="acappCapp" ColumnName="acappCapp" />
+          <ScalarProperty Name="acappDesc" ColumnName="acappDesc" />
+          <ScalarProperty Name="acappCmod" ColumnName="acappCmod" />
+          <ScalarProperty Name="acappTapp" ColumnName="acappTapp" />
+          <ScalarProperty Name="acappUrlx" ColumnName="acappUrlx" />
+          <ScalarProperty Name="acappCtrl" ColumnName="acappCtrl" />
+          <ScalarProperty Name="acappNord" ColumnName="acappNord" />
+          <ScalarProperty Name="acappVisi" ColumnName="acappVisi" />
+          <ScalarProperty Name="acappeGra" ColumnName="acappeGra" />
+          <ScalarProperty Name="acappeEli" ColumnName="acappeEli" />
+          <ScalarProperty Name="acappeAct" ColumnName="acappeAct" />
+          <ScalarProperty Name="acappeBus" ColumnName="acappeBus" />
+          <ScalarProperty Name="acappStat" ColumnName="acappStat" />
+          <ScalarProperty Name="acappRide" ColumnName="acappRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acaxp">
+      <EntityTypeMapping TypeName="AcModel.acaxp">
+        <MappingFragment StoreEntitySet="acaxp">
+          <ScalarProperty Name="acaxpCaxp" ColumnName="acaxpCaxp" />
+          <ScalarProperty Name="acaxpCprf" ColumnName="acaxpCprf" />
+          <ScalarProperty Name="acaxpCmod" ColumnName="acaxpCmod" />
+          <ScalarProperty Name="acaxpCapp" ColumnName="acaxpCapp" />
+          <ScalarProperty Name="acaxpeGra" ColumnName="acaxpeGra" />
+          <ScalarProperty Name="acaxpeEli" ColumnName="acaxpeEli" />
+          <ScalarProperty Name="acaxpeAct" ColumnName="acaxpeAct" />
+          <ScalarProperty Name="acaxpeBus" ColumnName="acaxpeBus" />
+          <ScalarProperty Name="acaxpStat" ColumnName="acaxpStat" />
+          <ScalarProperty Name="acaxpRide" ColumnName="acaxpRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="accon">
+      <EntityTypeMapping TypeName="AcModel.accon">
+        <MappingFragment StoreEntitySet="accon">
+          <ScalarProperty Name="acconCcon" ColumnName="acconCcon" />
+          <ScalarProperty Name="acconPref" ColumnName="acconPref" />
+          <ScalarProperty Name="acconCorr" ColumnName="acconCorr" />
+          <ScalarProperty Name="acconAbrv" ColumnName="acconAbrv" />
+          <ScalarProperty Name="acconDesc" ColumnName="acconDesc" />
+          <ScalarProperty Name="acconStaC" ColumnName="acconStaC" />
+          <ScalarProperty Name="acconRide" ColumnName="acconRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acepc">
+      <EntityTypeMapping TypeName="AcModel.acepc">
+        <MappingFragment StoreEntitySet="acepc">
+          <ScalarProperty Name="acepcCepc" ColumnName="acepcCepc" />
+          <ScalarProperty Name="acepcNomb" ColumnName="acepcNomb" />
+          <ScalarProperty Name="acepcSigl" ColumnName="acepcSigl" />
+          <ScalarProperty Name="acepcNrou" ColumnName="acepcNrou" />
+          <ScalarProperty Name="acepcRubr" ColumnName="acepcRubr" />
+          <ScalarProperty Name="acepcMisn" ColumnName="acepcMisn" />
+          <ScalarProperty Name="acepcDbnm" ColumnName="acepcDbnm" />
+          <ScalarProperty Name="acepcScnx" ColumnName="acepcScnx" />
+          <ScalarProperty Name="acepcFreg" ColumnName="acepcFreg" />
+          <ScalarProperty Name="acepcFvto" ColumnName="acepcFvto" />
+          <ScalarProperty Name="acepcStat" ColumnName="acepcStat" />
+          <ScalarProperty Name="acepcRide" ColumnName="acepcRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aclgn">
+      <EntityTypeMapping TypeName="AcModel.aclgn">
+        <MappingFragment StoreEntitySet="aclgn">
+          <ScalarProperty Name="aclgnClgn" ColumnName="aclgnClgn" />
+          <ScalarProperty Name="aclgnCusr" ColumnName="aclgnCusr" />
+          <ScalarProperty Name="aclgnSess" ColumnName="aclgnSess" />
+          <ScalarProperty Name="aclgnHNam" ColumnName="aclgnHNam" />
+          <ScalarProperty Name="aclgnISrv" ColumnName="aclgnISrv" />
+          <ScalarProperty Name="aclgnFsys" ColumnName="aclgnFsys" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aclog">
+      <EntityTypeMapping TypeName="AcModel.aclog">
+        <MappingFragment StoreEntitySet="aclog">
+          <ScalarProperty Name="aclogRide" ColumnName="aclogRide" />
+          <ScalarProperty Name="aclogCusr" ColumnName="aclogCusr" />
+          <ScalarProperty Name="aclogClgn" ColumnName="aclogClgn" />
+          <ScalarProperty Name="aclogCmod" ColumnName="aclogCmod" />
+          <ScalarProperty Name="aclogCapp" ColumnName="aclogCapp" />
+          <ScalarProperty Name="aclogCevn" ColumnName="aclogCevn" />
+          <ScalarProperty Name="aclogFsys" ColumnName="aclogFsys" />
+          <ScalarProperty Name="aclogRida" ColumnName="aclogRida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acmod">
+      <EntityTypeMapping TypeName="AcModel.acmod">
+        <MappingFragment StoreEntitySet="acmod">
+          <ScalarProperty Name="acmodCmod" ColumnName="acmodCmod" />
+          <ScalarProperty Name="acmodAbrv" ColumnName="acmodAbrv" />
+          <ScalarProperty Name="acmodDesc" ColumnName="acmodDesc" />
+          <ScalarProperty Name="acmodMisn" ColumnName="acmodMisn" />
+          <ScalarProperty Name="acmodNord" ColumnName="acmodNord" />
+          <ScalarProperty Name="acmodimag" ColumnName="acmodimag" />
+          <ScalarProperty Name="acmodStaM" ColumnName="acmodStaM" />
+          <ScalarProperty Name="acmodStat" ColumnName="acmodStat" />
+          <ScalarProperty Name="acmodRide" ColumnName="acmodRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acmxe">
+      <EntityTypeMapping TypeName="AcModel.acmxe">
+        <MappingFragment StoreEntitySet="acmxe">
+          <ScalarProperty Name="acmxeCmxe" ColumnName="acmxeCmxe" />
+          <ScalarProperty Name="acmxeCepc" ColumnName="acmxeCepc" />
+          <ScalarProperty Name="acmxeCmod" ColumnName="acmxeCmod" />
+          <ScalarProperty Name="acmxeStat" ColumnName="acmxeStat" />
+          <ScalarProperty Name="acmxeRide" ColumnName="acmxeRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acpme">
+      <EntityTypeMapping TypeName="AcModel.acpme">
+        <MappingFragment StoreEntitySet="acpme">
+          <ScalarProperty Name="acpmeCpme" ColumnName="acpmeCpme" />
+          <ScalarProperty Name="acpmeCfll" ColumnName="acpmeCfll" />
+          <ScalarProperty Name="acpmeCdwr" ColumnName="acpmeCdwr" />
+          <ScalarProperty Name="acpmeCdvi" ColumnName="acpmeCdvi" />
+          <ScalarProperty Name="acpmePass" ColumnName="acpmePass" />
+          <ScalarProperty Name="acpmeStat" ColumnName="acpmeStat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acprf">
+      <EntityTypeMapping TypeName="AcModel.acprf">
+        <MappingFragment StoreEntitySet="acprf">
+          <ScalarProperty Name="acprfCprf" ColumnName="acprfCprf" />
+          <ScalarProperty Name="acprfDesc" ColumnName="acprfDesc" />
+          <ScalarProperty Name="acprfMisn" ColumnName="acprfMisn" />
+          <ScalarProperty Name="acprfStaP" ColumnName="acprfStaP" />
+          <ScalarProperty Name="acprfStat" ColumnName="acprfStat" />
+          <ScalarProperty Name="acprfRide" ColumnName="acprfRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acpxe">
+      <EntityTypeMapping TypeName="AcModel.acpxe">
+        <MappingFragment StoreEntitySet="acpxe">
+          <ScalarProperty Name="acpxeCpxe" ColumnName="acpxeCpxe" />
+          <ScalarProperty Name="acpxeCprf" ColumnName="acpxeCprf" />
+          <ScalarProperty Name="acpxeCepc" ColumnName="acpxeCepc" />
+          <ScalarProperty Name="acpxeStat" ColumnName="acpxeStat" />
+          <ScalarProperty Name="acpxeRide" ColumnName="acpxeRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acser">
+      <EntityTypeMapping TypeName="AcModel.acser">
+        <MappingFragment StoreEntitySet="acser">
+          <ScalarProperty Name="acserCser" ColumnName="acserCser" />
+          <ScalarProperty Name="acserTble" ColumnName="acserTble" />
+          <ScalarProperty Name="acserTkey" ColumnName="acserTkey" />
+          <ScalarProperty Name="acserNact" ColumnName="acserNact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acusr">
+      <EntityTypeMapping TypeName="AcModel.acusr">
+        <MappingFragment StoreEntitySet="acusr">
+          <ScalarProperty Name="acusrCusr" ColumnName="acusrCusr" />
+          <ScalarProperty Name="acusrPass" ColumnName="acusrPass" />
+          <ScalarProperty Name="acusrNomb" ColumnName="acusrNomb" />
+          <ScalarProperty Name="acusrFReg" ColumnName="acusrFReg" />
+          <ScalarProperty Name="acusrFPas" ColumnName="acusrFPas" />
+          <ScalarProperty Name="acusrStat" ColumnName="acusrStat" />
+          <ScalarProperty Name="acusrRide" ColumnName="acusrRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acuxe">
+      <EntityTypeMapping TypeName="AcModel.acuxe">
+        <MappingFragment StoreEntitySet="acuxe">
+          <ScalarProperty Name="acuxeCuxe" ColumnName="acuxeCuxe" />
+          <ScalarProperty Name="acuxeCusr" ColumnName="acuxeCusr" />
+          <ScalarProperty Name="acuxeCepc" ColumnName="acuxeCepc" />
+          <ScalarProperty Name="acuxeStaU" ColumnName="acuxeStaU" />
+          <ScalarProperty Name="acuxeFtra" ColumnName="acuxeFtra" />
+          <ScalarProperty Name="acuxeFvto" ColumnName="acuxeFvto" />
+          <ScalarProperty Name="acuxeStat" ColumnName="acuxeStat" />
+          <ScalarProperty Name="acuxeRide" ColumnName="acuxeRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="acuxp">
+      <EntityTypeMapping TypeName="AcModel.acuxp">
+        <MappingFragment StoreEntitySet="acuxp">
+          <ScalarProperty Name="acuxpCuxp" ColumnName="acuxpCuxp" />
+          <ScalarProperty Name="acuxpCusr" ColumnName="acuxpCusr" />
+          <ScalarProperty Name="acuxpCprf" ColumnName="acuxpCprf" />
+          <ScalarProperty Name="acuxpCepc" ColumnName="acuxpCepc" />
+          <ScalarProperty Name="acuxpStat" ColumnName="acuxpStat" />
+          <ScalarProperty Name="acuxpRide" ColumnName="acuxpRide" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="AcModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

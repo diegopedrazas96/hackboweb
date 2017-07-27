@@ -1,0 +1,71 @@
+﻿HOLA
+@model System.Data.DataTable
+@using System.Data;
+@{
+    string raiz = null;
+    string modulo = null;
+    string tipoAPP = null;
+    string aplicacion = null;
+    int href = 1;
+}
+@foreach (DataRow row in ViewBag.Lista)
+{
+  
+
+    string groupName = Convert.ToString(row["dCmod"]);
+    <li class="">
+
+        @if (modulo != null && modulo != Convert.ToString(row["dCmod"]))
+        {
+            modulo = null;
+            tipoAPP = null;
+            aplicacion = null;
+        }
+        @if (tipoAPP != null && tipoAPP != Convert.ToString(row["dTapp"]))
+        {
+            tipoAPP = null;
+            aplicacion = null;
+        }
+        @if (modulo == null)
+        {
+           
+            <a><i class="fa fa-bug"></i> @groupName<span class="fa fa-chevron-down"></span></a>
+        }
+        <ul class="nav child_menu" style="display: none !important;">
+
+            @if (tipoAPP == null)
+            {
+                tipoAPP = Convert.ToString(row["dTapp"]).Trim();
+
+
+            }
+             @if (modulo != Convert.ToString(row["dCmod"]).Trim())
+             {
+                 modulo = Convert.ToString(row["dCmod"]).Trim();
+                foreach (DataRow row2 in ViewBag.Lista)
+                {
+                    if (Convert.ToString(row2["dCmod"]).Trim() == modulo)
+                    {
+                        <li>
+                            <a id="" href="@Convert.ToString(row2["acappUrlx"]).Trim()">@Convert.ToString(row2["acappDesc"]).Trim()</a>
+
+
+                        </li>
+                     }
+                     else
+                     {
+                         
+                     }
+                 }
+
+             }else
+             {
+
+             }
+
+
+        </ul>
+
+    </li>
+
+}
