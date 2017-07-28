@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AcModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AcModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="acapp">
           <Key>
             <PropertyRef Name="acappCapp" />
@@ -101,7 +101,7 @@
           <Property Name="acmodDesc" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="acmodMisn" Type="nvarchar" MaxLength="180" Nullable="false" />
           <Property Name="acmodNord" Type="int" Nullable="false" />
-          <Property Name="acmodimag" Type="varbinary(max)" />
+          <Property Name="acmodImag" Type="varbinary(max)" />
           <Property Name="acmodStaM" Type="int" Nullable="false" />
           <Property Name="acmodStat" Type="int" Nullable="false" />
           <Property Name="acmodRide" Type="int" Nullable="false" />
@@ -153,9 +153,9 @@
             <PropertyRef Name="acserCser" />
           </Key>
           <Property Name="acserCser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="acserTble" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="acserTkey" Type="nchar" MaxLength="15" Nullable="false" />
-          <Property Name="acserNact" Type="int" Nullable="false" />
+          <Property Name="acserTble" Type="nchar" MaxLength="15" />
+          <Property Name="acserTkey" Type="nchar" MaxLength="15" />
+          <Property Name="acserNact" Type="int" />
         </EntityType>
         <EntityType Name="acusr">
           <Key>
@@ -193,6 +193,45 @@
           <Property Name="acuxpStat" Type="int" Nullable="false" />
           <Property Name="acuxpRide" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="disenoflota">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="flotaId" Type="int" />
+          <Property Name="piso" Type="int" />
+          <Property Name="cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="estadoasientos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisenoFlotaId" Type="int" />
+          <Property Name="CodAsiento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="flotas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TipoIdc" Type="int" Nullable="false" />
+          <Property Name="EmpresaId" Type="int" Nullable="false" />
+          <Property Name="Placa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Chofer" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ayudante" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NroPisos" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -202,6 +241,37 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="viaje">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmpresaId" Type="int" />
+          <Property Name="Origen" Type="varchar" MaxLength="50" />
+          <Property Name="Destino" Type="varchar" MaxLength="50" />
+          <Property Name="Horario" Type="datetime" />
+          <Property Name="Precio" Type="decimal" Precision="12" Scale="2" />
+        </EntityType>
+        <EntityType Name="viajecliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="viajeid" Type="int" Nullable="false" />
+          <Property Name="clienteid" Type="int" Nullable="false" />
+          <Property Name="asientoId" Type="int" />
+          <Property Name="ci" Type="varchar" MaxLength="50" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="edad" Type="int" />
+        </EntityType>
+        <EntityType Name="viajeflota">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ViajeId" Type="int" Nullable="false" />
+          <Property Name="FlotaId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="fk_acappCmod">
           <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
@@ -260,18 +330,6 @@
             </Principal>
             <Dependent Role="acaxp">
               <PropertyRef Name="acaxpCprf" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_acepcRubr">
-          <End Role="accon" Type="Self.accon" Multiplicity="1" />
-          <End Role="acepc" Type="Self.acepc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="accon">
-              <PropertyRef Name="acconCcon" />
-            </Principal>
-            <Dependent Role="acepc">
-              <PropertyRef Name="acepcRubr" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -455,6 +513,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_disenoflota_flotas">
+          <End Role="flotas" Type="Self.flotas" Multiplicity="0..1" />
+          <End Role="disenoflota" Type="Self.disenoflota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flotas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="disenoflota">
+              <PropertyRef Name="flotaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estadoasientos_disenoflota">
+          <End Role="disenoflota" Type="Self.disenoflota" Multiplicity="0..1" />
+          <End Role="estadoasientos" Type="Self.estadoasientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="disenoflota">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="estadoasientos">
+              <PropertyRef Name="DisenoFlotaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_flotas_acepc">
+          <End Role="acepc" Type="Self.acepc" Multiplicity="1" />
+          <End Role="flotas" Type="Self.flotas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acepc">
+              <PropertyRef Name="acepcCepc" />
+            </Principal>
+            <Dependent Role="flotas">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_viaje_acepc">
+          <End Role="acepc" Type="Self.acepc" Multiplicity="0..1" />
+          <End Role="viaje" Type="Self.viaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acepc">
+              <PropertyRef Name="acepcCepc" />
+            </Principal>
+            <Dependent Role="viaje">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_viajecliente_clientes">
+          <End Role="clientes" Type="Self.clientes" Multiplicity="1" />
+          <End Role="viajecliente" Type="Self.viajecliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="viajecliente">
+              <PropertyRef Name="clienteid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_viajecliente_viaje">
+          <End Role="viaje" Type="Self.viaje" Multiplicity="1" />
+          <End Role="viajecliente" Type="Self.viajecliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="viaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="viajecliente">
+              <PropertyRef Name="viajeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_viajeflota_flotas">
+          <End Role="flotas" Type="Self.flotas" Multiplicity="1" />
+          <End Role="viajeflota" Type="Self.viajeflota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flotas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="viajeflota">
+              <PropertyRef Name="FlotaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_viajeflota_viaje">
+          <End Role="viaje" Type="Self.viaje" Multiplicity="1" />
+          <End Role="viajeflota" Type="Self.viajeflota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="viaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="viajeflota">
+              <PropertyRef Name="ViajeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AcModelStoreContainer">
           <EntitySet Name="acapp" EntityType="Self.acapp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="acaxp" EntityType="Self.acaxp" Schema="dbo" store:Type="Tables" />
@@ -471,7 +625,14 @@
           <EntitySet Name="acusr" EntityType="Self.acusr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="acuxe" EntityType="Self.acuxe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="acuxp" EntityType="Self.acuxp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="disenoflota" EntityType="Self.disenoflota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estadoasientos" EntityType="Self.estadoasientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="flotas" EntityType="Self.flotas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="viaje" EntityType="Self.viaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="viajecliente" EntityType="Self.viajecliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="viajeflota" EntityType="Self.viajeflota" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_acappCmod" Association="Self.fk_acappCmod">
             <End Role="acmod" EntitySet="acmod" />
             <End Role="acapp" EntitySet="acapp" />
@@ -491,10 +652,6 @@
           <AssociationSet Name="fk_acaxpCprf" Association="Self.fk_acaxpCprf">
             <End Role="acprf" EntitySet="acprf" />
             <End Role="acaxp" EntitySet="acaxp" />
-          </AssociationSet>
-          <AssociationSet Name="fk_acepcRubr" Association="Self.fk_acepcRubr">
-            <End Role="accon" EntitySet="accon" />
-            <End Role="acepc" EntitySet="acepc" />
           </AssociationSet>
           <AssociationSet Name="fk_aclgnCusr" Association="Self.fk_aclgnCusr">
             <End Role="acusr" EntitySet="acusr" />
@@ -556,9 +713,40 @@
             <End Role="acusr" EntitySet="acusr" />
             <End Role="acuxp" EntitySet="acuxp" />
           </AssociationSet>
+          <AssociationSet Name="FK_disenoflota_flotas" Association="Self.FK_disenoflota_flotas">
+            <End Role="flotas" EntitySet="flotas" />
+            <End Role="disenoflota" EntitySet="disenoflota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estadoasientos_disenoflota" Association="Self.FK_estadoasientos_disenoflota">
+            <End Role="disenoflota" EntitySet="disenoflota" />
+            <End Role="estadoasientos" EntitySet="estadoasientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_flotas_acepc" Association="Self.FK_flotas_acepc">
+            <End Role="acepc" EntitySet="acepc" />
+            <End Role="flotas" EntitySet="flotas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_viaje_acepc" Association="Self.FK_viaje_acepc">
+            <End Role="acepc" EntitySet="acepc" />
+            <End Role="viaje" EntitySet="viaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_viajecliente_clientes" Association="Self.FK_viajecliente_clientes">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="viajecliente" EntitySet="viajecliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_viajecliente_viaje" Association="Self.FK_viajecliente_viaje">
+            <End Role="viaje" EntitySet="viaje" />
+            <End Role="viajecliente" EntitySet="viajecliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_viajeflota_flotas" Association="Self.FK_viajeflota_flotas">
+            <End Role="flotas" EntitySet="flotas" />
+            <End Role="viajeflota" EntitySet="viajeflota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_viajeflota_viaje" Association="Self.FK_viajeflota_viaje">
+            <End Role="viaje" EntitySet="viaje" />
+            <End Role="viajeflota" EntitySet="viajeflota" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AcModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -580,10 +768,10 @@
           <Property Name="acappeBus" Type="Int32" Nullable="false" />
           <Property Name="acappStat" Type="Int32" Nullable="false" />
           <Property Name="acappRide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="acmod" Relationship="Self.fk_acappCmod" FromRole="acapp" ToRole="acmod" />
           <NavigationProperty Name="accon" Relationship="Self.fk_acappTapp" FromRole="acapp" ToRole="accon" />
           <NavigationProperty Name="acaxp" Relationship="Self.fk_acaxpcapp" FromRole="acapp" ToRole="acaxp" />
           <NavigationProperty Name="aclog" Relationship="Self.fk_aclogCapp" FromRole="acapp" ToRole="aclog" />
+          <NavigationProperty Name="acmod" Relationship="AcModel.fk_acappCmod" FromRole="acapp" ToRole="acmod" />
         </EntityType>
         <EntityType Name="acaxp">
           <Key>
@@ -600,8 +788,8 @@
           <Property Name="acaxpStat" Type="Int32" Nullable="false" />
           <Property Name="acaxpRide" Type="Int32" Nullable="false" />
           <NavigationProperty Name="acapp" Relationship="Self.fk_acaxpcapp" FromRole="acaxp" ToRole="acapp" />
-          <NavigationProperty Name="acmod" Relationship="Self.fk_acaxpcmod" FromRole="acaxp" ToRole="acmod" />
           <NavigationProperty Name="acprf" Relationship="Self.fk_acaxpCprf" FromRole="acaxp" ToRole="acprf" />
+          <NavigationProperty Name="acmod" Relationship="AcModel.fk_acaxpcmod" FromRole="acaxp" ToRole="acmod" />
         </EntityType>
         <EntityType Name="accon">
           <Key>
@@ -639,6 +827,8 @@
           <NavigationProperty Name="acpxe" Relationship="Self.fk_acpxeCepc" FromRole="acepc" ToRole="acpxe" />
           <NavigationProperty Name="acuxe" Relationship="Self.fk_acuxeCepc" FromRole="acepc" ToRole="acuxe" />
           <NavigationProperty Name="acuxp" Relationship="Self.fk_acuxpCepc" FromRole="acepc" ToRole="acuxp" />
+          <NavigationProperty Name="flotas" Relationship="AcModel.FK_flotas_acepc" FromRole="acepc" ToRole="flotas" />
+          <NavigationProperty Name="viaje" Relationship="AcModel.FK_viaje_acepc" FromRole="acepc" ToRole="viaje" />
         </EntityType>
         <EntityType Name="aclgn">
           <Key>
@@ -668,26 +858,8 @@
           <NavigationProperty Name="acapp" Relationship="Self.fk_aclogCapp" FromRole="aclog" ToRole="acapp" />
           <NavigationProperty Name="accon" Relationship="Self.fk_aclogCevn" FromRole="aclog" ToRole="accon" />
           <NavigationProperty Name="aclgn" Relationship="Self.fk_aclogClgn" FromRole="aclog" ToRole="aclgn" />
-          <NavigationProperty Name="acmod" Relationship="Self.fk_aclogcmod" FromRole="aclog" ToRole="acmod" />
           <NavigationProperty Name="acusr" Relationship="Self.fk_aclogcusr" FromRole="aclog" ToRole="acusr" />
-        </EntityType>
-        <EntityType Name="acmod">
-          <Key>
-            <PropertyRef Name="acmodCmod" />
-          </Key>
-          <Property Name="acmodCmod" Type="Int32" Nullable="false" />
-          <Property Name="acmodAbrv" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="acmodDesc" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="acmodMisn" Type="String" MaxLength="180" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="acmodNord" Type="Int32" Nullable="false" />
-          <Property Name="acmodimag" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="acmodStaM" Type="Int32" Nullable="false" />
-          <Property Name="acmodStat" Type="Int32" Nullable="false" />
-          <Property Name="acmodRide" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="acapp" Relationship="Self.fk_acappCmod" FromRole="acmod" ToRole="acapp" />
-          <NavigationProperty Name="acaxp" Relationship="Self.fk_acaxpcmod" FromRole="acmod" ToRole="acaxp" />
-          <NavigationProperty Name="aclog" Relationship="Self.fk_aclogcmod" FromRole="acmod" ToRole="aclog" />
-          <NavigationProperty Name="acmxe" Relationship="Self.fk_acmxeCmod" FromRole="acmod" ToRole="acmxe" />
+          <NavigationProperty Name="acmod" Relationship="AcModel.fk_aclogcmod" FromRole="aclog" ToRole="acmod" />
         </EntityType>
         <EntityType Name="acmxe">
           <Key>
@@ -699,7 +871,7 @@
           <Property Name="acmxeStat" Type="Int32" Nullable="false" />
           <Property Name="acmxeRide" Type="Int32" Nullable="false" />
           <NavigationProperty Name="acepc" Relationship="Self.fk_acmxeCepc" FromRole="acmxe" ToRole="acepc" />
-          <NavigationProperty Name="acmod" Relationship="Self.fk_acmxeCmod" FromRole="acmxe" ToRole="acmod" />
+          <NavigationProperty Name="acmod" Relationship="AcModel.fk_acmxeCmod" FromRole="acmxe" ToRole="acmod" />
         </EntityType>
         <EntityType Name="acpme">
           <Key>
@@ -743,9 +915,9 @@
             <PropertyRef Name="acserCser" />
           </Key>
           <Property Name="acserCser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="acserTble" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="acserTkey" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="acserNact" Type="Int32" Nullable="false" />
+          <Property Name="acserTble" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="acserTkey" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="acserNact" Type="Int32" />
         </EntityType>
         <EntityType Name="acusr">
           <Key>
@@ -802,18 +974,6 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="fk_acappCmod">
-          <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
-          <End Role="acapp" Type="Self.acapp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="acmod">
-              <PropertyRef Name="acmodCmod" />
-            </Principal>
-            <Dependent Role="acapp">
-              <PropertyRef Name="acappCmod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_acappTapp">
           <End Role="accon" Type="Self.accon" Multiplicity="1" />
           <End Role="acapp" Type="Self.acapp" Multiplicity="*" />
@@ -847,18 +1007,6 @@
             </Principal>
             <Dependent Role="aclog">
               <PropertyRef Name="aclogCapp" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_acaxpcmod">
-          <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
-          <End Role="acaxp" Type="Self.acaxp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="acmod">
-              <PropertyRef Name="acmodCmod" />
-            </Principal>
-            <Dependent Role="acaxp">
-              <PropertyRef Name="acaxpCmod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -970,18 +1118,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_aclogcmod">
-          <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
-          <End Role="aclog" Type="Self.aclog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="acmod">
-              <PropertyRef Name="acmodCmod" />
-            </Principal>
-            <Dependent Role="aclog">
-              <PropertyRef Name="aclogCmod" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_aclogcusr">
           <End Role="acusr" Type="Self.acusr" Multiplicity="1" />
           <End Role="aclog" Type="Self.aclog" Multiplicity="*" />
@@ -991,18 +1127,6 @@
             </Principal>
             <Dependent Role="aclog">
               <PropertyRef Name="aclogCusr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_acmxeCmod">
-          <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
-          <End Role="acmxe" Type="Self.acmxe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="acmod">
-              <PropertyRef Name="acmodCmod" />
-            </Principal>
-            <Dependent Role="acmxe">
-              <PropertyRef Name="acmxeCmod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1061,7 +1185,6 @@
           <EntitySet Name="acepc" EntityType="Self.acepc" />
           <EntitySet Name="aclgn" EntityType="Self.aclgn" />
           <EntitySet Name="aclog" EntityType="Self.aclog" />
-          <EntitySet Name="acmod" EntityType="Self.acmod" />
           <EntitySet Name="acmxe" EntityType="Self.acmxe" />
           <EntitySet Name="acpme" EntityType="Self.acpme" />
           <EntitySet Name="acprf" EntityType="Self.acprf" />
@@ -1071,10 +1194,6 @@
           <EntitySet Name="acuxe" EntityType="Self.acuxe" />
           <EntitySet Name="acuxp" EntityType="Self.acuxp" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="fk_acappCmod" Association="Self.fk_acappCmod">
-            <End Role="acmod" EntitySet="acmod" />
-            <End Role="acapp" EntitySet="acapp" />
-          </AssociationSet>
           <AssociationSet Name="fk_acappTapp" Association="Self.fk_acappTapp">
             <End Role="accon" EntitySet="accon" />
             <End Role="acapp" EntitySet="acapp" />
@@ -1086,10 +1205,6 @@
           <AssociationSet Name="fk_aclogCapp" Association="Self.fk_aclogCapp">
             <End Role="acapp" EntitySet="acapp" />
             <End Role="aclog" EntitySet="aclog" />
-          </AssociationSet>
-          <AssociationSet Name="fk_acaxpcmod" Association="Self.fk_acaxpcmod">
-            <End Role="acmod" EntitySet="acmod" />
-            <End Role="acaxp" EntitySet="acaxp" />
           </AssociationSet>
           <AssociationSet Name="fk_acaxpCprf" Association="Self.fk_acaxpCprf">
             <End Role="acprf" EntitySet="acprf" />
@@ -1127,17 +1242,9 @@
             <End Role="aclgn" EntitySet="aclgn" />
             <End Role="aclog" EntitySet="aclog" />
           </AssociationSet>
-          <AssociationSet Name="fk_aclogcmod" Association="Self.fk_aclogcmod">
-            <End Role="acmod" EntitySet="acmod" />
-            <End Role="aclog" EntitySet="aclog" />
-          </AssociationSet>
           <AssociationSet Name="fk_aclogcusr" Association="Self.fk_aclogcusr">
             <End Role="acusr" EntitySet="acusr" />
             <End Role="aclog" EntitySet="aclog" />
-          </AssociationSet>
-          <AssociationSet Name="fk_acmxeCmod" Association="Self.fk_acmxeCmod">
-            <End Role="acmod" EntitySet="acmod" />
-            <End Role="acmxe" EntitySet="acmxe" />
           </AssociationSet>
           <AssociationSet Name="fk_acpxeCprf" Association="Self.fk_acpxeCprf">
             <End Role="acprf" EntitySet="acprf" />
@@ -1155,7 +1262,309 @@
             <End Role="acusr" EntitySet="acusr" />
             <End Role="acuxp" EntitySet="acuxp" />
           </AssociationSet>
+          <EntitySet Name="clientes" EntityType="AcModel.clientes" />
+          <EntitySet Name="disenoflota" EntityType="AcModel.disenoflota" />
+          <EntitySet Name="estadoasientos" EntityType="AcModel.estadoasientos" />
+          <EntitySet Name="flotas" EntityType="AcModel.flotas" />
+          <EntitySet Name="viajeflota" EntityType="AcModel.viajeflota" />
+          <AssociationSet Name="FK_flotas_acepc" Association="AcModel.FK_flotas_acepc">
+            <End Role="acepc" EntitySet="acepc" />
+            <End Role="flotas" EntitySet="flotas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_disenoflota_flotas" Association="AcModel.FK_disenoflota_flotas">
+            <End Role="flotas" EntitySet="flotas" />
+            <End Role="disenoflota" EntitySet="disenoflota" />
+          </AssociationSet>
+          <AssociationSet Name="FK_estadoasientos_disenoflota" Association="AcModel.FK_estadoasientos_disenoflota">
+            <End Role="disenoflota" EntitySet="disenoflota" />
+            <End Role="estadoasientos" EntitySet="estadoasientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_viajeflota_flotas" Association="AcModel.FK_viajeflota_flotas">
+            <End Role="flotas" EntitySet="flotas" />
+            <End Role="viajeflota" EntitySet="viajeflota" />
+          </AssociationSet>
+          <EntitySet Name="viajecliente" EntityType="AcModel.viajecliente" />
+          <AssociationSet Name="FK_viajecliente_clientes" Association="AcModel.FK_viajecliente_clientes">
+            <End Role="clientes" EntitySet="clientes" />
+            <End Role="viajecliente" EntitySet="viajecliente" />
+          </AssociationSet>
+          <EntitySet Name="acmod" EntityType="AcModel.acmod" />
+          <AssociationSet Name="fk_acappCmod" Association="AcModel.fk_acappCmod">
+            <End Role="acmod" EntitySet="acmod" />
+            <End Role="acapp" EntitySet="acapp" />
+          </AssociationSet>
+          <AssociationSet Name="fk_acaxpcmod" Association="AcModel.fk_acaxpcmod">
+            <End Role="acmod" EntitySet="acmod" />
+            <End Role="acaxp" EntitySet="acaxp" />
+          </AssociationSet>
+          <AssociationSet Name="fk_aclogcmod" Association="AcModel.fk_aclogcmod">
+            <End Role="acmod" EntitySet="acmod" />
+            <End Role="aclog" EntitySet="aclog" />
+          </AssociationSet>
+          <AssociationSet Name="fk_acmxeCmod" Association="AcModel.fk_acmxeCmod">
+            <End Role="acmod" EntitySet="acmod" />
+            <End Role="acmxe" EntitySet="acmxe" />
+          </AssociationSet>
+          <EntitySet Name="viaje" EntityType="AcModel.viaje" />
+          <AssociationSet Name="FK_viaje_acepc" Association="AcModel.FK_viaje_acepc">
+            <End Role="acepc" EntitySet="acepc" />
+            <End Role="viaje" EntitySet="viaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_viajecliente_viaje" Association="AcModel.FK_viajecliente_viaje">
+            <End Role="viaje" EntitySet="viaje" />
+            <End Role="viajecliente" EntitySet="viajecliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_viajeflota_viaje" Association="AcModel.FK_viajeflota_viaje">
+            <End Role="viaje" EntitySet="viaje" />
+            <End Role="viajeflota" EntitySet="viajeflota" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="clientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="viajecliente" Relationship="AcModel.FK_viajecliente_clientes" FromRole="clientes" ToRole="viajecliente" />
+        </EntityType>
+        <EntityType Name="disenoflota">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="flotaId" Type="Int32" />
+          <Property Name="piso" Type="Int32" />
+          <Property Name="cantidad" Type="Int32" />
+          <NavigationProperty Name="flotas" Relationship="AcModel.FK_disenoflota_flotas" FromRole="disenoflota" ToRole="flotas" />
+          <NavigationProperty Name="estadoasientos" Relationship="AcModel.FK_estadoasientos_disenoflota" FromRole="disenoflota" ToRole="estadoasientos" />
+        </EntityType>
+        <EntityType Name="estadoasientos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisenoFlotaId" Type="Int32" />
+          <Property Name="CodAsiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="disenoflota" Relationship="AcModel.FK_estadoasientos_disenoflota" FromRole="estadoasientos" ToRole="disenoflota" />
+        </EntityType>
+        <EntityType Name="flotas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TipoIdc" Type="Int32" Nullable="false" />
+          <Property Name="EmpresaId" Type="Int32" Nullable="false" />
+          <Property Name="Placa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Chofer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ayudante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NroPisos" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="acepc" Relationship="AcModel.FK_flotas_acepc" FromRole="flotas" ToRole="acepc" />
+          <NavigationProperty Name="disenoflota" Relationship="AcModel.FK_disenoflota_flotas" FromRole="flotas" ToRole="disenoflota" />
+          <NavigationProperty Name="viajeflota" Relationship="AcModel.FK_viajeflota_flotas" FromRole="flotas" ToRole="viajeflota" />
+        </EntityType>
+        <EntityType Name="viajeflota">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ViajeId" Type="Int32" Nullable="false" />
+          <Property Name="FlotaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="flotas" Relationship="AcModel.FK_viajeflota_flotas" FromRole="viajeflota" ToRole="flotas" />
+          <NavigationProperty Name="viaje" Relationship="AcModel.FK_viajeflota_viaje" FromRole="viajeflota" ToRole="viaje" />
+        </EntityType>
+        <Association Name="FK_flotas_acepc">
+          <End Type="AcModel.acepc" Role="acepc" Multiplicity="1" />
+          <End Type="AcModel.flotas" Role="flotas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acepc">
+              <PropertyRef Name="acepcCepc" />
+            </Principal>
+            <Dependent Role="flotas">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_disenoflota_flotas">
+          <End Type="AcModel.flotas" Role="flotas" Multiplicity="0..1" />
+          <End Type="AcModel.disenoflota" Role="disenoflota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flotas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="disenoflota">
+              <PropertyRef Name="flotaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_estadoasientos_disenoflota">
+          <End Type="AcModel.disenoflota" Role="disenoflota" Multiplicity="0..1" />
+          <End Type="AcModel.estadoasientos" Role="estadoasientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="disenoflota">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="estadoasientos">
+              <PropertyRef Name="DisenoFlotaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_viajeflota_flotas">
+          <End Type="AcModel.flotas" Role="flotas" Multiplicity="1" />
+          <End Type="AcModel.viajeflota" Role="viajeflota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flotas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="viajeflota">
+              <PropertyRef Name="FlotaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="viajecliente">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="viajeid" Type="Int32" Nullable="false" />
+          <Property Name="clienteid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="clientes" Relationship="AcModel.FK_viajecliente_clientes" FromRole="viajecliente" ToRole="clientes" />
+          <NavigationProperty Name="viaje" Relationship="AcModel.FK_viajecliente_viaje" FromRole="viajecliente" ToRole="viaje" />
+          <Property Name="asientoId" Type="Int32" />
+          <Property Name="ci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="edad" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_viajecliente_clientes">
+          <End Type="AcModel.clientes" Role="clientes" Multiplicity="1" />
+          <End Type="AcModel.viajecliente" Role="viajecliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="viajecliente">
+              <PropertyRef Name="clienteid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="acmod">
+          <Key>
+            <PropertyRef Name="acmodCmod" />
+          </Key>
+          <Property Name="acmodCmod" Type="Int32" Nullable="false" />
+          <Property Name="acmodAbrv" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="acmodDesc" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="acmodMisn" Type="String" Nullable="false" MaxLength="180" FixedLength="false" Unicode="true" />
+          <Property Name="acmodNord" Type="Int32" Nullable="false" />
+          <Property Name="acmodImag" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="acmodStaM" Type="Int32" Nullable="false" />
+          <Property Name="acmodStat" Type="Int32" Nullable="false" />
+          <Property Name="acmodRide" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="acapp" Relationship="AcModel.fk_acappCmod" FromRole="acmod" ToRole="acapp" />
+          <NavigationProperty Name="acaxp" Relationship="AcModel.fk_acaxpcmod" FromRole="acmod" ToRole="acaxp" />
+          <NavigationProperty Name="aclog" Relationship="AcModel.fk_aclogcmod" FromRole="acmod" ToRole="aclog" />
+          <NavigationProperty Name="acmxe" Relationship="AcModel.fk_acmxeCmod" FromRole="acmod" ToRole="acmxe" />
+        </EntityType>
+        <Association Name="fk_acappCmod">
+          <End Type="AcModel.acmod" Role="acmod" Multiplicity="1" />
+          <End Type="AcModel.acapp" Role="acapp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acmod">
+              <PropertyRef Name="acmodCmod" />
+            </Principal>
+            <Dependent Role="acapp">
+              <PropertyRef Name="acappCmod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_acaxpcmod">
+          <End Type="AcModel.acmod" Role="acmod" Multiplicity="1" />
+          <End Type="AcModel.acaxp" Role="acaxp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acmod">
+              <PropertyRef Name="acmodCmod" />
+            </Principal>
+            <Dependent Role="acaxp">
+              <PropertyRef Name="acaxpCmod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_aclogcmod">
+          <End Type="AcModel.acmod" Role="acmod" Multiplicity="1" />
+          <End Type="AcModel.aclog" Role="aclog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acmod">
+              <PropertyRef Name="acmodCmod" />
+            </Principal>
+            <Dependent Role="aclog">
+              <PropertyRef Name="aclogCmod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_acmxeCmod">
+          <End Type="AcModel.acmod" Role="acmod" Multiplicity="1" />
+          <End Type="AcModel.acmxe" Role="acmxe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acmod">
+              <PropertyRef Name="acmodCmod" />
+            </Principal>
+            <Dependent Role="acmxe">
+              <PropertyRef Name="acmxeCmod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="viaje">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmpresaId" Type="Int32" />
+          <Property Name="Origen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Destino" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Horario" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="acepc" Relationship="AcModel.FK_viaje_acepc" FromRole="viaje" ToRole="acepc" />
+          <NavigationProperty Name="viajecliente" Relationship="AcModel.FK_viajecliente_viaje" FromRole="viaje" ToRole="viajecliente" />
+          <NavigationProperty Name="viajeflota" Relationship="AcModel.FK_viajeflota_viaje" FromRole="viaje" ToRole="viajeflota" />
+          <Property Name="Precio" Type="Decimal" Precision="12" Scale="2" />
+        </EntityType>
+        <Association Name="FK_viaje_acepc">
+          <End Type="AcModel.acepc" Role="acepc" Multiplicity="0..1" />
+          <End Type="AcModel.viaje" Role="viaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="acepc">
+              <PropertyRef Name="acepcCepc" />
+            </Principal>
+            <Dependent Role="viaje">
+              <PropertyRef Name="EmpresaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_viajecliente_viaje">
+          <End Type="AcModel.viaje" Role="viaje" Multiplicity="1" />
+          <End Type="AcModel.viajecliente" Role="viajecliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="viaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="viajecliente">
+              <PropertyRef Name="viajeid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_viajeflota_viaje">
+          <End Type="AcModel.viaje" Role="viaje" Multiplicity="1" />
+          <End Type="AcModel.viajeflota" Role="viajeflota" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="viaje">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="viajeflota">
+              <PropertyRef Name="ViajeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1252,21 +1661,6 @@
                 <ScalarProperty Name="aclogCevn" ColumnName="aclogCevn" />
                 <ScalarProperty Name="aclogFsys" ColumnName="aclogFsys" />
                 <ScalarProperty Name="aclogRida" ColumnName="aclogRida" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="acmod">
-            <EntityTypeMapping TypeName="AcModel.acmod">
-              <MappingFragment StoreEntitySet="acmod">
-                <ScalarProperty Name="acmodCmod" ColumnName="acmodCmod" />
-                <ScalarProperty Name="acmodAbrv" ColumnName="acmodAbrv" />
-                <ScalarProperty Name="acmodDesc" ColumnName="acmodDesc" />
-                <ScalarProperty Name="acmodMisn" ColumnName="acmodMisn" />
-                <ScalarProperty Name="acmodNord" ColumnName="acmodNord" />
-                <ScalarProperty Name="acmodimag" ColumnName="acmodimag" />
-                <ScalarProperty Name="acmodStaM" ColumnName="acmodStaM" />
-                <ScalarProperty Name="acmodStat" ColumnName="acmodStat" />
-                <ScalarProperty Name="acmodRide" ColumnName="acmodRide" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1373,6 +1767,98 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clientes">
+            <EntityTypeMapping TypeName="AcModel.clientes">
+              <MappingFragment StoreEntitySet="clientes">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="disenoflota">
+            <EntityTypeMapping TypeName="AcModel.disenoflota">
+              <MappingFragment StoreEntitySet="disenoflota">
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="piso" ColumnName="piso" />
+                <ScalarProperty Name="flotaId" ColumnName="flotaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estadoasientos">
+            <EntityTypeMapping TypeName="AcModel.estadoasientos">
+              <MappingFragment StoreEntitySet="estadoasientos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CodAsiento" ColumnName="CodAsiento" />
+                <ScalarProperty Name="DisenoFlotaId" ColumnName="DisenoFlotaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flotas">
+            <EntityTypeMapping TypeName="AcModel.flotas">
+              <MappingFragment StoreEntitySet="flotas">
+                <ScalarProperty Name="NroPisos" ColumnName="NroPisos" />
+                <ScalarProperty Name="Ayudante" ColumnName="Ayudante" />
+                <ScalarProperty Name="Chofer" ColumnName="Chofer" />
+                <ScalarProperty Name="Placa" ColumnName="Placa" />
+                <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+                <ScalarProperty Name="TipoIdc" ColumnName="TipoIdc" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viajeflota">
+            <EntityTypeMapping TypeName="AcModel.viajeflota">
+              <MappingFragment StoreEntitySet="viajeflota">
+                <ScalarProperty Name="FlotaId" ColumnName="FlotaId" />
+                <ScalarProperty Name="ViajeId" ColumnName="ViajeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viajecliente">
+            <EntityTypeMapping TypeName="AcModel.viajecliente">
+              <MappingFragment StoreEntitySet="viajecliente">
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="ci" ColumnName="ci" />
+                <ScalarProperty Name="asientoId" ColumnName="asientoId" />
+                <ScalarProperty Name="clienteid" ColumnName="clienteid" />
+                <ScalarProperty Name="viajeid" ColumnName="viajeid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="acmod">
+            <EntityTypeMapping TypeName="AcModel.acmod">
+              <MappingFragment StoreEntitySet="acmod">
+                <ScalarProperty Name="acmodRide" ColumnName="acmodRide" />
+                <ScalarProperty Name="acmodStat" ColumnName="acmodStat" />
+                <ScalarProperty Name="acmodStaM" ColumnName="acmodStaM" />
+                <ScalarProperty Name="acmodImag" ColumnName="acmodImag" />
+                <ScalarProperty Name="acmodNord" ColumnName="acmodNord" />
+                <ScalarProperty Name="acmodMisn" ColumnName="acmodMisn" />
+                <ScalarProperty Name="acmodDesc" ColumnName="acmodDesc" />
+                <ScalarProperty Name="acmodAbrv" ColumnName="acmodAbrv" />
+                <ScalarProperty Name="acmodCmod" ColumnName="acmodCmod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viaje">
+            <EntityTypeMapping TypeName="AcModel.viaje">
+              <MappingFragment StoreEntitySet="viaje">
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+                <ScalarProperty Name="EmpresaId" ColumnName="EmpresaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

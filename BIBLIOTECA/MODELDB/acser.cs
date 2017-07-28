@@ -17,6 +17,6 @@ namespace BIBLIOTECA.MODELDB
         public int acserCser { get; set; }
         public string acserTble { get; set; }
         public string acserTkey { get; set; }
-        public int acserNact { get; set; }
+        public Nullable<int> acserNact { get; set; }
     }
 }

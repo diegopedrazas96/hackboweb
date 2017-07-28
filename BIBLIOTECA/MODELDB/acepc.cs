@@ -21,6 +21,8 @@ namespace BIBLIOTECA.MODELDB
             this.acpxe = new HashSet<acpxe>();
             this.acuxe = new HashSet<acuxe>();
             this.acuxp = new HashSet<acuxp>();
+            this.flotas = new HashSet<flotas>();
+            this.viaje = new HashSet<viaje>();
         }
     
         public int acepcCepc { get; set; }
@@ -45,5 +47,9 @@ namespace BIBLIOTECA.MODELDB
         public virtual ICollection<acuxe> acuxe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<acuxp> acuxp { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<flotas> flotas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<viaje> viaje { get; set; }
     }
 }

@@ -18,6 +18,8 @@ namespace BIBLIOTECA.MODELDB
         public AcEntities()
             : base("name=AcEntities")
         {
+
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,7 +33,6 @@ namespace BIBLIOTECA.MODELDB
         public virtual DbSet<acepc> acepc { get; set; }
         public virtual DbSet<aclgn> aclgn { get; set; }
         public virtual DbSet<aclog> aclog { get; set; }
-        public virtual DbSet<acmod> acmod { get; set; }
         public virtual DbSet<acmxe> acmxe { get; set; }
         public virtual DbSet<acpme> acpme { get; set; }
         public virtual DbSet<acprf> acprf { get; set; }
@@ -41,5 +42,13 @@ namespace BIBLIOTECA.MODELDB
         public virtual DbSet<acuxe> acuxe { get; set; }
         public virtual DbSet<acuxp> acuxp { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<clientes> clientes { get; set; }
+        public virtual DbSet<disenoflota> disenoflota { get; set; }
+        public virtual DbSet<estadoasientos> estadoasientos { get; set; }
+        public virtual DbSet<flotas> flotas { get; set; }
+        public virtual DbSet<viajeflota> viajeflota { get; set; }
+        public virtual DbSet<viajecliente> viajecliente { get; set; }
+        public virtual DbSet<acmod> acmod { get; set; }
+        public virtual DbSet<viaje> viaje { get; set; }
     }
 }

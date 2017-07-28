@@ -242,7 +242,6 @@ C:\Users\Eduardo Machaca\Documents\Visual Studio 2015\Projects\DXApplication1\BI
 C:\Users\Eduardo Machaca\Documents\Visual Studio 2015\Projects\DXApplication1\BIBLIOTECA\bin\ru\DevExpress.XtraTreeList.v17.1.resources.dll
 C:\Users\Eduardo Machaca\Documents\Visual Studio 2015\Projects\DXApplication1\BIBLIOTECA\obj\Debug\BIBLIOTECA.dll
 C:\Users\Eduardo Machaca\Documents\Visual Studio 2015\Projects\DXApplication1\BIBLIOTECA\obj\Debug\BIBLIOTECA.pdb
-C:\Users\Eduardo Machaca\Documents\Visual Studio 2015\Projects\DXApplication1\BIBLIOTECA\obj\Debug\BIBLIOTECA.csprojResolveAssemblyReference.cache
 C:\Users\Eduardo Machaca\Documents\Visual Studio 2015\Projects\DXApplication1\BIBLIOTECA\bin\es\System.Net.Http.Formatting.resources.dll
 C:\Users\Eduardo Machaca\Documents\Visual Studio 2015\Projects\DXApplication1\BIBLIOTECA\bin\es\System.Web.Http.resources.dll
 C:\Users\Eduardo Machaca\Documents\Visual Studio 2015\Projects\DXApplication1\BIBLIOTECA\bin\es\System.Web.Http.WebHost.resources.dll

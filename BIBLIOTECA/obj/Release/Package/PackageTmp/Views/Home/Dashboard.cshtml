@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+<ul>
+    @foreach (var std in ViewData["hola"].ToString()) 
+    {
+        <li>
+            @std
+        </li>
+    }
+</ul>

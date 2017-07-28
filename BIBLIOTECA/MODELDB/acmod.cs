@@ -28,7 +28,7 @@ namespace BIBLIOTECA.MODELDB
         public string acmodDesc { get; set; }
         public string acmodMisn { get; set; }
         public int acmodNord { get; set; }
-        public byte[] acmodimag { get; set; }
+        public byte[] acmodImag { get; set; }
         public int acmodStaM { get; set; }
         public int acmodStat { get; set; }
         public int acmodRide { get; set; }

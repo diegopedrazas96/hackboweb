@@ -96,7 +96,7 @@
     <Property Name="acmodDesc" Type="nvarchar" MaxLength="60" Nullable="false" />
     <Property Name="acmodMisn" Type="nvarchar" MaxLength="180" Nullable="false" />
     <Property Name="acmodNord" Type="int" Nullable="false" />
-    <Property Name="acmodimag" Type="varbinary(max)" />
+    <Property Name="acmodImag" Type="varbinary(max)" />
     <Property Name="acmodStaM" Type="int" Nullable="false" />
     <Property Name="acmodStat" Type="int" Nullable="false" />
     <Property Name="acmodRide" Type="int" Nullable="false" />
@@ -148,9 +148,9 @@
       <PropertyRef Name="acserCser" />
     </Key>
     <Property Name="acserCser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="acserTble" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="acserTkey" Type="nchar" MaxLength="15" Nullable="false" />
-    <Property Name="acserNact" Type="int" Nullable="false" />
+    <Property Name="acserTble" Type="nchar" MaxLength="15" />
+    <Property Name="acserTkey" Type="nchar" MaxLength="15" />
+    <Property Name="acserNact" Type="int" />
   </EntityType>
   <EntityType Name="acusr">
     <Key>
@@ -188,6 +188,45 @@
     <Property Name="acuxpStat" Type="int" Nullable="false" />
     <Property Name="acuxpRide" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar(max)" Nullable="false" />
+    <Property Name="Email" Type="varchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="disenoflota">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="flotaId" Type="int" />
+    <Property Name="piso" Type="int" />
+    <Property Name="cantidad" Type="int" />
+  </EntityType>
+  <EntityType Name="estadoasientos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisenoFlotaId" Type="int" />
+    <Property Name="CodAsiento" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="flotas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TipoIdc" Type="int" Nullable="false" />
+    <Property Name="EmpresaId" Type="int" Nullable="false" />
+    <Property Name="Placa" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Chofer" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ayudante" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NroPisos" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -197,6 +236,37 @@
     <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="viaje">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="EmpresaId" Type="int" />
+    <Property Name="Origen" Type="varchar" MaxLength="50" />
+    <Property Name="Destino" Type="varchar" MaxLength="50" />
+    <Property Name="Horario" Type="datetime" />
+    <Property Name="Precio" Type="decimal" Precision="12" Scale="2" />
+  </EntityType>
+  <EntityType Name="viajecliente">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="viajeid" Type="int" Nullable="false" />
+    <Property Name="clienteid" Type="int" Nullable="false" />
+    <Property Name="asientoId" Type="int" />
+    <Property Name="ci" Type="varchar" MaxLength="50" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="edad" Type="int" />
+  </EntityType>
+  <EntityType Name="viajeflota">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ViajeId" Type="int" Nullable="false" />
+    <Property Name="FlotaId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="fk_acappCmod">
     <End Role="acmod" Type="Self.acmod" Multiplicity="1" />
@@ -255,18 +325,6 @@
       </Principal>
       <Dependent Role="acaxp">
         <PropertyRef Name="acaxpCprf" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_acepcRubr">
-    <End Role="accon" Type="Self.accon" Multiplicity="1" />
-    <End Role="acepc" Type="Self.acepc" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="accon">
-        <PropertyRef Name="acconCcon" />
-      </Principal>
-      <Dependent Role="acepc">
-        <PropertyRef Name="acepcRubr" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -450,6 +508,102 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_disenoflota_flotas">
+    <End Role="flotas" Type="Self.flotas" Multiplicity="0..1" />
+    <End Role="disenoflota" Type="Self.disenoflota" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="flotas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="disenoflota">
+        <PropertyRef Name="flotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_estadoasientos_disenoflota">
+    <End Role="disenoflota" Type="Self.disenoflota" Multiplicity="0..1" />
+    <End Role="estadoasientos" Type="Self.estadoasientos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="disenoflota">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="estadoasientos">
+        <PropertyRef Name="DisenoFlotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_flotas_acepc">
+    <End Role="acepc" Type="Self.acepc" Multiplicity="1" />
+    <End Role="flotas" Type="Self.flotas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acepc">
+        <PropertyRef Name="acepcCepc" />
+      </Principal>
+      <Dependent Role="flotas">
+        <PropertyRef Name="EmpresaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_viaje_acepc">
+    <End Role="acepc" Type="Self.acepc" Multiplicity="0..1" />
+    <End Role="viaje" Type="Self.viaje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="acepc">
+        <PropertyRef Name="acepcCepc" />
+      </Principal>
+      <Dependent Role="viaje">
+        <PropertyRef Name="EmpresaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_viajecliente_clientes">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="1" />
+    <End Role="viajecliente" Type="Self.viajecliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="viajecliente">
+        <PropertyRef Name="clienteid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_viajecliente_viaje">
+    <End Role="viaje" Type="Self.viaje" Multiplicity="1" />
+    <End Role="viajecliente" Type="Self.viajecliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="viaje">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="viajecliente">
+        <PropertyRef Name="viajeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_viajeflota_flotas">
+    <End Role="flotas" Type="Self.flotas" Multiplicity="1" />
+    <End Role="viajeflota" Type="Self.viajeflota" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="flotas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="viajeflota">
+        <PropertyRef Name="FlotaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_viajeflota_viaje">
+    <End Role="viaje" Type="Self.viaje" Multiplicity="1" />
+    <End Role="viajeflota" Type="Self.viajeflota" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="viaje">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="viajeflota">
+        <PropertyRef Name="ViajeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="AcModelStoreContainer">
     <EntitySet Name="acapp" EntityType="Self.acapp" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="acaxp" EntityType="Self.acaxp" Schema="dbo" store:Type="Tables" />
@@ -466,7 +620,14 @@
     <EntitySet Name="acusr" EntityType="Self.acusr" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="acuxe" EntityType="Self.acuxe" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="acuxp" EntityType="Self.acuxp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="disenoflota" EntityType="Self.disenoflota" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="estadoasientos" EntityType="Self.estadoasientos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="flotas" EntityType="Self.flotas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="viaje" EntityType="Self.viaje" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="viajecliente" EntityType="Self.viajecliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="viajeflota" EntityType="Self.viajeflota" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="fk_acappCmod" Association="Self.fk_acappCmod">
       <End Role="acmod" EntitySet="acmod" />
       <End Role="acapp" EntitySet="acapp" />
@@ -486,10 +647,6 @@
     <AssociationSet Name="fk_acaxpCprf" Association="Self.fk_acaxpCprf">
       <End Role="acprf" EntitySet="acprf" />
       <End Role="acaxp" EntitySet="acaxp" />
-    </AssociationSet>
-    <AssociationSet Name="fk_acepcRubr" Association="Self.fk_acepcRubr">
-      <End Role="accon" EntitySet="accon" />
-      <End Role="acepc" EntitySet="acepc" />
     </AssociationSet>
     <AssociationSet Name="fk_aclgnCusr" Association="Self.fk_aclgnCusr">
       <End Role="acusr" EntitySet="acusr" />
@@ -550,6 +707,38 @@
     <AssociationSet Name="fk_acuxpCusr" Association="Self.fk_acuxpCusr">
       <End Role="acusr" EntitySet="acusr" />
       <End Role="acuxp" EntitySet="acuxp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_disenoflota_flotas" Association="Self.FK_disenoflota_flotas">
+      <End Role="flotas" EntitySet="flotas" />
+      <End Role="disenoflota" EntitySet="disenoflota" />
+    </AssociationSet>
+    <AssociationSet Name="FK_estadoasientos_disenoflota" Association="Self.FK_estadoasientos_disenoflota">
+      <End Role="disenoflota" EntitySet="disenoflota" />
+      <End Role="estadoasientos" EntitySet="estadoasientos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_flotas_acepc" Association="Self.FK_flotas_acepc">
+      <End Role="acepc" EntitySet="acepc" />
+      <End Role="flotas" EntitySet="flotas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_viaje_acepc" Association="Self.FK_viaje_acepc">
+      <End Role="acepc" EntitySet="acepc" />
+      <End Role="viaje" EntitySet="viaje" />
+    </AssociationSet>
+    <AssociationSet Name="FK_viajecliente_clientes" Association="Self.FK_viajecliente_clientes">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="viajecliente" EntitySet="viajecliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_viajecliente_viaje" Association="Self.FK_viajecliente_viaje">
+      <End Role="viaje" EntitySet="viaje" />
+      <End Role="viajecliente" EntitySet="viajecliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_viajeflota_flotas" Association="Self.FK_viajeflota_flotas">
+      <End Role="flotas" EntitySet="flotas" />
+      <End Role="viajeflota" EntitySet="viajeflota" />
+    </AssociationSet>
+    <AssociationSet Name="FK_viajeflota_viaje" Association="Self.FK_viajeflota_viaje">
+      <End Role="viaje" EntitySet="viaje" />
+      <End Role="viajeflota" EntitySet="viajeflota" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

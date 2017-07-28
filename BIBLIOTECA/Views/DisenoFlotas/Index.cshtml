@@ -1,0 +1,59 @@
+﻿@model BIBLIOTECA.Models.disenoflotaModal
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int bus = 0;
+}
+@{ 
+    BIBLIOTECA.MODELDB.AcEntities loDb = new BIBLIOTECA.MODELDB.AcEntities();
+    var List = (from c in loDb.flotas
+                join s in loDb.acepc on c.EmpresaId equals s.acepcCepc 
+                join u in loDb.accon on c.TipoIdc equals u.acconCcon 
+               
+                select new { c, s, u }).ToList();
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+
+            @foreach (var empresa in List)
+            {
+                if (empresa.c.EmpresaId == 1)
+                {
+                    var chofer = empresa.c.Chofer;
+                    var placa = empresa.c.Placa;
+                    var tipos = empresa.u.acconDesc;
+
+                    <li class="active"><a href="">@chofer | @placa @tipos</a></li>
+
+                }
+            
+            }
+            
+        </ul>
+    </div>
+    @foreach (var a in Model.disenoflotas)
+    {
+
+        bus++;
+        <div class="col-md-8 col-sm-9 col-xs-9" style=" margin:5px">
+            <div class="x_title">
+                <h2>BUS <small>  @bus</small></h2>
+                
+                <div class="clearfix"></div>
+            </div>
+            @for (int i = 0; i <= a.cantidad; i++)
+            {
+                <div class="col-md-2 col-sm-2 col-xs-3" style="background-color:green; margin:5px; width: 23% ; height: 200px">
+                    asiento @i
+                </div>
+            }
+        </div>
+
+
+    }
+</div>
+
+
+
+    

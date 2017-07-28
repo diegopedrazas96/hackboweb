@@ -26,7 +26,7 @@ namespace BIBLIOTECA.MODELDB
         public int acaxpRide { get; set; }
     
         public virtual acapp acapp { get; set; }
-        public virtual acmod acmod { get; set; }
         public virtual acprf acprf { get; set; }
+        public virtual acmod acmod { get; set; }
     }
 }

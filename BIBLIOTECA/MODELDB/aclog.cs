@@ -26,7 +26,7 @@ namespace BIBLIOTECA.MODELDB
         public virtual acapp acapp { get; set; }
         public virtual accon accon { get; set; }
         public virtual aclgn aclgn { get; set; }
-        public virtual acmod acmod { get; set; }
         public virtual acusr acusr { get; set; }
+        public virtual acmod acmod { get; set; }
     }
 }

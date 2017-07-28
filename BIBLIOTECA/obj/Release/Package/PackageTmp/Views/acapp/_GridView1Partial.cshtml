@@ -1,0 +1,141 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView1";
+        settings.CallbackRouteValues = new { Controller = "acapp", Action = "GridView1Partial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "acapp", Action = "GridView1PartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "acapp", Action = "GridView1PartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "acapp", Action = "GridView1PartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.NotSet;
+        settings.SettingsPopup.EditForm.VerticalAlign = PopupVerticalAlign.WindowCenter;
+        settings.SettingsPopup.EditForm.Width = 800;
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.KeyFieldName = "acappCapp";
+        settings.Width = Unit.Percentage(100);
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        settings.InitNewRow = (sender, e) =>
+        {
+            e.NewValues["acappCapp"] = "0";
+        };
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "acappCapp";
+            column.Caption = "Codigo";
+            column.ReadOnly = true;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "acappDesc";
+            column.Caption = "Descripcion";
+
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var tbSettings = column.PropertiesEdit as TextBoxProperties;
+            tbSettings.ValidationSettings.RequiredField.IsRequired = true;
+            tbSettings.ValidationSettings.RequiredField.ErrorText = "Es requerido el campo Descripcion";
+            tbSettings.ValidationSettings.RegularExpression.ValidationExpression = "^[/\\s/A-Za-z0-9ñÑáéíóúÁÉÍÓÚ]+";
+            tbSettings.ValidationSettings.RegularExpression.ErrorText = "¡Porvafor! Escriba texto, y/o números 12345";
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "acappCmod";
+            column.Caption = "Modulo";
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.TextField = "acmodDesc";
+                p.ValueField = "acmodCmod";
+                p.ValueType = typeof(int);
+                p.DataSource = Model.lstAcmod;
+            });
+
+            var tbSettings = column.PropertiesEdit as ComboBoxProperties;
+            tbSettings.ValidationSettings.RequiredField.IsRequired = true;
+            tbSettings.ValidationSettings.RequiredField.ErrorText = "Es requerido el campo Modulo";
+        }); ;
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "acappTapp";
+            column.Caption = "Tipo de Aplicacion";
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.TextField = "acconDesc";
+                p.ValueField = "acconCcon";
+                p.ValueType = typeof(int);
+                p.DataSource = Model.lstTipo;
+            });
+            var tbSettings = column.PropertiesEdit as ComboBoxProperties;
+            tbSettings.ValidationSettings.RequiredField.IsRequired = true;
+            tbSettings.ValidationSettings.RequiredField.ErrorText = "Es requerido el campo Tipo de Aplicacion";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "acappUrlx";
+            column.Caption = "Direccion de la Aplicacion";
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var tbSettings = column.PropertiesEdit as TextBoxProperties;
+            tbSettings.ValidationSettings.RequiredField.IsRequired = true;
+            tbSettings.ValidationSettings.RequiredField.ErrorText = "Es requerido el campo Direccion de la Aplicacion";
+            tbSettings.MaskSettings.ShowHints = true;
+            tbSettings.MaskSettings.Mask = "<\\~/>><aaaaa></>><aaaaa>";
+            tbSettings.MaskSettings.IncludeLiterals = MaskIncludeLiteralsMode.All;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "acappCtrl";
+            column.Caption = "Controlador";
+            column.ColumnType = MVCxGridViewColumnType.TextBox;
+            var tbSettings = column.PropertiesEdit as TextBoxProperties;
+            tbSettings.ValidationSettings.RequiredField.IsRequired = true;
+            tbSettings.ValidationSettings.RequiredField.ErrorText = "Es requerido el campo Controlador";
+            tbSettings.MaskSettings.ShowHints = true;
+            tbSettings.MaskSettings.Mask = "<aa><\\C\\o\\n\\t\\r\\o\\l\\l\\e\\r>";
+            tbSettings.MaskSettings.IncludeLiterals = MaskIncludeLiteralsMode.All;
+
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "acappNord";
+            column.Caption = "Orden en el Menu";
+            column.ColumnType = MVCxGridViewColumnType.SpinEdit;
+            var tbSettings = column.PropertiesEdit as SpinEditProperties;
+            tbSettings.SpinButtons.Position = ButtonsPosition.Right;
+            tbSettings.SpinButtons.ShowLargeIncrementButtons = true;
+            tbSettings.MinValue = 0;
+            tbSettings.MaxValue = int.MaxValue;
+            tbSettings.NumberType = SpinEditNumberType.Integer;
+            tbSettings.DisplayFormatString = "D";
+            tbSettings.SpinButtons.ShowIncrementButtons = true;
+            tbSettings.ValidationSettings.RequiredField.IsRequired = true;
+            tbSettings.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+            tbSettings.ValidationSettings.RequiredField.ErrorText = "Es requerido el campo Orden en el menu ";
+
+        });
+        settings.Columns.Add("acappVisi", "Es Visible", MVCxGridViewColumnType.CheckBox);
+        settings.Columns.Add("acappeBus", "Puede Buscar", MVCxGridViewColumnType.CheckBox);
+        settings.Columns.Add("acappeGra", "Puede Grabar", MVCxGridViewColumnType.CheckBox);
+        settings.Columns.Add("acappeAct", "Puede Actualizar", MVCxGridViewColumnType.CheckBox);
+        settings.Columns.Add("acappeEli", "Puede Eliminar", MVCxGridViewColumnType.CheckBox);
+
+    });
+
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model.lstAcapp).GetHtml()

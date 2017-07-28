@@ -1,0 +1,72 @@
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridView";
+        settings.CallbackRouteValues = new { Controller = "flotas", Action = "GridViewPartial" };
+
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "flotas", Action = "GridViewPartialAddNew" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "flotas", Action = "GridViewPartialUpdate" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "flotas", Action = "GridViewPartialDelete" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsPopup.EditForm.HorizontalAlign = PopupHorizontalAlign.NotSet;
+
+        settings.SettingsBehavior.ConfirmDelete = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.KeyFieldName = "Id";
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+        
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EmpresaId";
+            column.Caption = "Empresa";
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.TextField = "acepcNomb";
+                p.ValueField = "acepcCepc";
+                p.ValueType = typeof(int);
+                p.DataSource = Model.lstAcepc;
+            });
+            var tbSettings = column.PropertiesEdit as ComboBoxProperties;
+            tbSettings.ValidationSettings.RequiredField.IsRequired = true;
+            tbSettings.ValidationSettings.RequiredField.ErrorText = "Es requerido el campo Tipo de Aplicacion";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TipoIdc";
+            column.Caption = "Tipo de bus";
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.TextField = "acconDesc";
+                p.ValueField = "acconCcon";
+                p.ValueType = typeof(int);
+                p.DataSource = Model.lstAccon;
+            });
+            var tbSettings = column.PropertiesEdit as ComboBoxProperties;
+            tbSettings.ValidationSettings.RequiredField.IsRequired = true;
+            tbSettings.ValidationSettings.RequiredField.ErrorText = "Es requerido el campo Tipo de Aplicacion";
+        });
+        settings.Columns.Add("Placa");
+        settings.Columns.Add("Chofer");
+        settings.Columns.Add("Ayudante");
+        settings.Columns.Add("NroPisos");
+        
+    });
+    if (ViewData["EditError"] != null){
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model.flotas).GetHtml()

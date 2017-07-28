@@ -11,8 +11,7 @@ namespace BIBLIOTECA.MODELDB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class acusr
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,8 +25,6 @@ namespace BIBLIOTECA.MODELDB
     
         public string acusrCusr { get; set; }
         public string acusrPass { get; set; }
-
-        [Display(Prompt = "Username...")]
         public string acusrNomb { get; set; }
         public System.DateTime acusrFReg { get; set; }
         public System.DateTime acusrFPas { get; set; }

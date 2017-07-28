@@ -1,0 +1,53 @@
+﻿@model BIBLIOTECA.Models.disenoflotaModal
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int bus = 0;
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+            @foreach (var empresa in Model.empresa.Where(x=> x.acepcCepc == 1))
+            {
+                foreach (var flotas in Model.flotas.Where(a => a.EmpresaId == empresa.acepcCepc))
+                {
+                    var chofer = flotas.Chofer;
+                    var placa = flotas.Placa;
+                    var tipos = "";
+                    foreach (var tipo in Model.tipos.Where(a => a.acconCcon == flotas.TipoIdc))
+                    {
+                        tipos= tipo.acconDesc;
+
+
+                    }
+                    <li class="active"><a href="">@chofer | @placa @tipos</a></li>
+                }
+            }
+            
+        </ul>
+    </div>
+    @foreach (var a in Model.disenoflotas)
+    {
+
+        bus++;
+        <div class="col-md-6 col-sm-6 col-xs-6" style=" width:46% ; margin:5px">
+            <div class="x_title">
+                <h2>BUS <small>  @bus</small></h2>
+                
+                <div class="clearfix"></div>
+            </div>
+            @for (int i = 0; i <= a.cantidad; i++)
+            {
+                <div class="col-md-2 col-sm-2 col-xs-3" style="background-color:green; margin:5px; width: 23% ; height: 200px">
+                    asiento @i
+                </div>
+            }
+        </div>
+
+
+    }
+</div>
+
+
+
+    

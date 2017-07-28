@@ -36,11 +36,11 @@ namespace BIBLIOTECA.MODELDB
         public int acappStat { get; set; }
         public int acappRide { get; set; }
     
-        public virtual acmod acmod { get; set; }
         public virtual accon accon { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<acaxp> acaxp { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aclog> aclog { get; set; }
+        public virtual acmod acmod { get; set; }
     }
 }
